@@ -20,7 +20,7 @@ import javax.persistence.Query;
 public class PersonaDaoImpl implements PersonaDao{
 
     //Se genera la inyeccion por medio de la unidad de persistencia indicada
-    @PersistenceContext(unitName = "PersonaPU")
+    @PersistenceContext(unitName = "WebPU")
     EntityManager entityManager;
     
     @Override

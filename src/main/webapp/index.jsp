@@ -8,5 +8,8 @@
     <body>
         <!--Va al servlet con ruta /personas-->
         <a href="personas">Ir a listar personas</a>
+        <p>
+        <a href="usuarios">Ir a listar usuarios</a>
+        <p>
     </body>
 </html>
