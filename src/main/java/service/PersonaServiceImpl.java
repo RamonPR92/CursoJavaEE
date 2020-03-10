@@ -5,10 +5,11 @@
  */
 package service;
 
+import data.PersonaDao;
 import domain.Persona;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 /**
  *
@@ -17,39 +18,37 @@ import javax.ejb.Stateless;
 @Stateless
 public class PersonaServiceImpl implements PersonaService{
 
+    @Inject
+    private PersonaDao personaDao;
+    
     @Override
     public List<Persona> listarPersonas() {
-        List<Persona> personas = new ArrayList<>();
-        personas.add(new Persona(1, "Ramon", "Perez", "ramonpr92@hotmail.com", "3317572094"));
-        personas.add(new Persona(2, "Ignacio", "Perez", "nachopr92@hotmail.com", "3317572094"));
-        personas.add(new Persona(3, "Lalo", "Perez", "lalopr92@hotmail.com", "3317572094"));
-        personas.add(new Persona(4, "Margarita", "Perez", "margaritapr92@hotmail.com", "3317572094"));
-        return personas;    
+        return personaDao.findAllPersonas();    
     }
 
     @Override
     public Persona encontrarPersonaPorId(int idPersona) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return personaDao.findPersonaById(idPersona);
     }
 
     @Override
     public Persona encontrarPersonaPorEmail(String email) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return personaDao.findPersonaByEmail(email);
     }
 
     @Override
     public void registrarPersona(Persona persona) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        personaDao.insertPersona(persona);
     }
 
     @Override
     public void modificarPersona(Persona persona) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        personaDao.updatePersona(persona);
     }
 
     @Override
     public void eliminarPersona(Persona persona) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        personaDao.deletePersona(persona);
     }
     
 }

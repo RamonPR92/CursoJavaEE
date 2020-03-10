@@ -28,7 +28,6 @@ public class PersonaServlet extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       //To change body of generated methods, choose Tools | Templates.
         List<Persona> personas = personaService.listarPersonas();
         personas.forEach(System.out::println);
         req.setAttribute("personas", personas);

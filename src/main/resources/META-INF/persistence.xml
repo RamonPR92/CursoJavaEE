@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
-    <!-- Define Persistence Unit -->
-    <persistence-unit name="my_persistence_unit">
-        
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:chemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+    http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xs" version="2.2">
+
+    <!-- Ejemplo de unidades de persistencia para aplicaciones que no esten en un contenedor 
+    <persistence_unit name="PersonaPU" transaction-type="RESOURCE_LOCAL">
+        <class>domain.Persona</class>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test?userSSL=false&amp;userTimeZone=true&amp;serverTimezone=UTC"></property>
+            <property name="javax.persistence.jdbc.user" value="root"></property>
+            <property name="javax.persistence.jdbc.password" value="admin"></property>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.MysqlDataSource"></property>  
+            <property name="eclipselink.logging.level.sql" value="FINE"></property>  
+            <property name="eclipselink.logging.parameters" value="true"></property>  
+             
+        </properties>
+    </persistence_unit>-->
+    <persistence-unit name="PersonaPU" transaction-type="JTA">
+        <jta-data-source>jdbc/PersonaDb</jta-data-source>
+        <!--Nombre para enlazar con la configuracion en el servidor
+            Paso 1: Descargar el conector .jar
+            Paso 2: Copiarlo y pegarlo  en las carpetas del servidor que estemos utilizando
+            Paso 3: Leventar el servidor, ir a Resources/JDBC
+            Paso 4: Crear un pool indicar el nombre, ResourceType (javax.sql.ConnectionPoolDataSource) y el vendor (Mysql)
+            Paso 5: Indicamos el DataSource ClassName (com.mysql.cj.jdbc.MysqlDataSource) 
+            Paso 6: Agregamos las propiedades de la conexion como password, dataBaseName, serverName(localhost),
+            dataSourceName(com.mysql.cj.jdbc.MysqlDataSource), user, portNumber
+            useSSL(false), useTimezone(true) y el serverTimezone (UTC)
+            Paso 7: Ir a  ir a Resources/JDBC
+            Paso 8: Crear un JDBC Resources agregamos el nombre, en este caso el nombre que indicamos en 
+            la etiqueta jta-data-source, en PoolName seleccionamos el pool que creamos en los pasos 4, 5 y 6-->
     </persistence-unit>
 </persistence>

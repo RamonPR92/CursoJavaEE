@@ -7,13 +7,26 @@ package domain;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author rperez
  */
+@Entity
+@NamedQuery(name="Persona.findAll", query="SELECT p FROM Persona p ORDER BY p.idPersona")
+@Table(name="persona")//Si la tabla no coincide con el nombre de la clase
 public class Persona implements Serializable{
     private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)// Llama a SELECT LAST_INSERT_ID()
+    @Column(name="id_persona")//mapear columna si el nombre es diferente
     private int idPersona;
     private String nombre;
     private String apellido;
@@ -23,8 +36,7 @@ public class Persona implements Serializable{
     public Persona() {
     }
 
-    public Persona(int idPersona, String nombre, String apellido, String email, String telefono) {
-        this.idPersona = idPersona;
+    public Persona(String nombre, String apellido, String email, String telefono) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
